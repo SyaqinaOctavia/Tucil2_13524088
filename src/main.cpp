@@ -74,6 +74,8 @@ int main() {
     vector<Checker> stat(maxDepth);
     
     auto start = chrono::high_resolution_clock::now();
+
+    // =========== MAIN ALGORITHM ===========
     try {
         OctreeNode* root = new OctreeNode(*minVx, *maxVx);
         buildOctree(root, 0, maxDepth, triangles, voxels, stat);
@@ -82,12 +84,11 @@ int main() {
         cerr << "Error: " << e.what() << endl;
         return 1;
     }
-    
+    // ============= END MAIN ================
     auto end = chrono::high_resolution_clock::now();
     chrono::duration<double> duration = end - start;
 
-    cout << "\n\n=========OUTPUT STAT=========" << endl;
-    cout << "Main time: " << duration.count() << " seconds" << endl;
+    auto mainTime = duration.count();
     
     start = chrono::high_resolution_clock::now();
     double voxelSize = voxels[0].half;
@@ -96,14 +97,16 @@ int main() {
         addVoxelCube(node.min, node.max, mesh);
     }
     
-    writeFile(filename, mesh);
-    
+    cout << "\n\n=========OUTPUT STAT=========" << endl;
+
+    writeFile(filename, mesh); 
     
     end = chrono::high_resolution_clock::now();
     duration = end - start;
+    auto writeTime = duration.count();
     
-    
-    cout << "Write time: " << duration.count() << " seconds" << endl;
+    cout << "Main time: " << mainTime << " seconds" << endl;
+    cout << "Write time: " << writeTime << " seconds" << endl;
     
     cout << "\nJumlah Voxel: " << voxels.size() << endl;
     cout << "Jumlah Vertices: " << mesh.getVertices().size() << endl;
@@ -115,13 +118,8 @@ int main() {
     }
     cout << "\n==> Tidak Perlu Ditelusuri" << endl;
     for(int i = 0; i < maxDepth; i++){
-        cout << stat[i].notChecked << "  : banyaknya node dengan depth " << i+1 <<" yang tidak perlu ditelusuri"<< endl;
+        cout << stat[i].notChecked << "  : banyaknya node dengan depth " << i+1 <<" yang tidak perlu ditelusuri"<< endl << endl;
     }
-    
-    double minBox = min3(minVx->x, minVx->y, minVx->z);
-    double maxBox = max3(maxVx->x, maxVx->y, maxVx->z);
-    
-    
     
     return 0;
 }

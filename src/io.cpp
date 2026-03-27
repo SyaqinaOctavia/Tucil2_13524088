@@ -71,6 +71,7 @@ void writeFile(const string& filename, const MeshBuilder& mesh) {
 
         i++;
     }
+    cout << "File output disimpan di " << path << endl;
     ofstream out(path);
 
     for (auto& v : mesh.getVertices()) {
