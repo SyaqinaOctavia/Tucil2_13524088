@@ -59,7 +59,7 @@ void inputFile(const string& filename, vector<Vertex>& vertices, vector<Face>& f
     }
 }
 
-void writeFile(const string& filename, const MeshBuilder& mesh) {
+void writeFile(const string& filename, const FaceBuilder& face) {
     int i = 1;
     string path;
     while (true) {
@@ -74,11 +74,11 @@ void writeFile(const string& filename, const MeshBuilder& mesh) {
     cout << "File output disimpan di " << path << endl;
     ofstream out(path);
 
-    for (auto& v : mesh.getVertices()) {
+    for (auto& v : face.getVertices()) {
         out << "v " << v.x << " " << v.y << " " << v.z << "\n";
     }
 
-    for (auto& f : mesh.getFaces()) {
+    for (auto& f : face.getFaces()) {
         out << "f " << f.a << " " << f.b << " " << f.c << "\n";
     }
 

@@ -23,6 +23,9 @@ bool checkProject(Vertex v0, Vertex v1, Vertex v2, Vertex axis, Vertex half){
 }
 
 bool Intersects(Triangle triangle, Cube aabb) {
+    // Separating Axis Theorm --> Jika ada suatu garis yang dapat memisahkan 2 bangunan, maka bangunan tersebut tidak berpotongan
+    // garis yang dicari, didapatkan dari pengujian 13 axis
+    
     Vertex v0 = triangle.p0;
     Vertex v1 = triangle.p1;
     Vertex v2 = triangle.p2;

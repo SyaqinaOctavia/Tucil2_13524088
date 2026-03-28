@@ -16,13 +16,9 @@ struct Cube{
     double half;
 };
 
-struct Triangle{
-    Vertex p0, p1, p2;
-};
+struct Triangle{ Vertex p0, p1, p2; };
 
-struct Face{
-    int a, b, c;
-};
+struct Face{ long a, b, c; };
 
 double min3(double a, double b, double c);
 double max3(double a, double b, double c);
